@@ -149,12 +149,18 @@ function renderFormulario(grupos, proximas) {
   });
 
   document.getElementById('app').innerHTML = `
-    <img src="https://institutoistanbul.ar/images/logo.png" class="logo" onerror="this.style.display='none'">
+    <img src="https://institutoistanbul.ar/images/logo.svg" class="logo" onerror="this.style.display='none'">
     <h1>Inscripción a Instituto İstanbul 🇹🇷</h1>
     <p class="subtitulo">Completá el formulario para reservar tu lugar.</p>
 
     <div class="seccion">
-      <div class="seccion-titulo">Elegí tu nivel</div>
+      <div class="seccion-titulo">Contraseña de acceso *</div>
+      <input type="text" id="contrasena" placeholder="Ingresá la contraseña que recibiste">
+      <div id="error-contrasena" class="error-msg">Contraseña incorrecta o expirada. Volvé al menú de WhatsApp.</div>
+    </div>
+
+    <div class="seccion">
+      <div class="seccion-titulo">Elige tu nivel</div>
       ${opcionesHTML}
       <div id="nivel-error" class="error-msg">Por favor elegí un nivel disponible.</div>
     </div>
@@ -205,11 +211,7 @@ function renderFormulario(grupos, proximas) {
       <div id="error-metodo" class="error-msg">Seleccioná un método de pago.</div>
     </div>
 
-    <div class="seccion">
-      <div class="seccion-titulo">Contraseña de acceso *</div>
-      <input type="text" id="contrasena" placeholder="Ingresá la contraseña que recibiste">
-      <div id="error-contrasena" class="error-msg">Contraseña incorrecta o expirada. Volvé al menú de WhatsApp.</div>
-    </div>
+    
 
     <div class="seccion">
       <div class="seccion-titulo">Términos y condiciones *</div>
@@ -237,7 +239,7 @@ function renderFormulario(grupos, proximas) {
       <div id="error-checks" class="error-msg">Debés aceptar todos los términos para continuar.</div>
     </div>
 
-    <div class="alerta-timer">⏰ ❗ Tenés 15 minutos para abonar y enviarnos el comprobante. Pasado ese tiempo, la inscripción se cancela automáticamente y no podrás volver a hacerlo.</div>
+    <div class="alerta-timer">⏰ ❗ Al apretar el botón "Enviar", vas a tener 15 minutos para abonar y enviarnos el comprobante por WhatsApp. Si no recibimos tu comprobante a tiempo, la inscripción se cancela automáticamente y no vas a poder volver a hacerla.</div>
 
     <button class="btn-enviar" onclick="enviarFormulario()">Enviar</button>
   `;
