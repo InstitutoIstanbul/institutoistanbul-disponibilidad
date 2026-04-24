@@ -67,8 +67,8 @@ a { color: var(--naranja); }
 
 
 .container {
-    display: grid;
-    place-items: center;
+    display: flex;
+    justify-content: center;
   }
 
   
@@ -161,8 +161,8 @@ function renderFormulario(grupos, proximas) {
   });
 
   document.getElementById('app').innerHTML = `
-    <div class="container"><img src="https://institutoistanbul.ar/images/logo.svg" class="logo" onerror="this.style.display='none'">
-    </div>
+    <img src="https://institutoistanbul.ar/images/logo.svg" class="logo" onerror="this.style.display='none'">
+    
     
     <h1>Inscripción a Instituto İstanbul 🇹🇷</h1>
     <p class="subtitulo">Completá el formulario para inscribirte.</p>
