@@ -150,12 +150,7 @@ function renderFormulario(grupos, proximas) {
         + '<div class="nivel-fecha">🗓️ Próxima apertura: ' + proximas[cod].fechaAperturaStr + '</div>'
         + '<div class="nivel-fecha">📋 Inscripciones abiertas desde: ' + proximas[cod].fechaInscripciones + '</div>'
         + '</div>';
-    } else {
-      opcionesHTML += '<div class="opcion-nivel no-disponible">'
-        + '<div class="nivel-titulo">' + nombre + ' (' + cod + ')</div>'
-        + '<div class="nivel-detalle">Sin disponibilidad</div>'
-        + '</div>';
-    }
+    } 
   });
 
   document.getElementById('app').innerHTML = `
