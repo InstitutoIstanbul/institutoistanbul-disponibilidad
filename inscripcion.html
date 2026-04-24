@@ -123,14 +123,14 @@ function renderFormulario(grupos, proximas) {
     if (gruposDelNivel.length > 0) {
       gruposDelNivel.forEach(function(grupo) {
         var alertaA2 = cod !== 'A1'
-          ? '<div class="alerta-nivel">⚠️ Nuestro método es único, te recomendamos empezar desde Principiante (A1) aunque tengas algo de conocimiento del idioma. Sin embargo podés inscribirte directamente desde este nivel.</div>'
+          ? '<div class="alerta-nivel">ℹ️ Nuestro método es único, te recomendamos empezar desde Principiante (A1) aunque ya tengas algo de conocimiento del idioma. De todas formas, podés inscribirte directamente en este nivel si lo preferís.</div>'
           : '';
         opcionesHTML += '<div class="opcion-nivel" onclick="elegirNivel(this)" '
           + 'data-nivel="' + cod + '" data-grupo="' + grupo.hoja + '" '
           + 'data-fecha="' + grupo.fechaInicioDisplay + '" data-tipo="' + grupo.tipo + '">'
           + '<div class="nivel-titulo">' + nombre + ' (' + cod + ')</div>'
           + '<div class="nivel-detalle">' + grupo.textoDisplay.replace(nombre + ' (' + cod + ') — ', '') + '</div>'
-          + '<div class="nivel-fecha">📅 Fecha de inicio: ' + grupo.fechaInicioDisplay + '</div>'
+          + '<div class="nivel-fecha">✅ Fecha de inicio: ' + grupo.fechaInicioDisplay + '</div>'
           + alertaA2 + '</div>';
       });
     } else if (proximas && proximas[cod]) {
@@ -151,7 +151,7 @@ function renderFormulario(grupos, proximas) {
   document.getElementById('app').innerHTML = `
     <img src="https://institutoistanbul.ar/images/logo.svg" class="logo" onerror="this.style.display='none'">
     <h1>Inscripción a Instituto İstanbul 🇹🇷</h1>
-    <p class="subtitulo">Completá el formulario para reservar tu lugar.</p>
+    <p class="subtitulo">Completá el formulario para inscribirte.</p>
 
     <div class="seccion">
       <div class="seccion-titulo">Contraseña de acceso *</div>
