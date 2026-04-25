@@ -301,7 +301,11 @@ function enviarFormulario() {
     document.getElementById('error-checks').style.display = 'block'; ok = false;
   }
 
-  if (!ok) return;
+  if (!ok) {
+  var primerError = document.querySelector('.error-msg[style*="block"]');
+  if (primerError) primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  return;
+}
 
   var btn = document.querySelector('.btn-enviar');
   btn.disabled = true;
