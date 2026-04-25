@@ -327,7 +327,7 @@ function enviarFormulario() {
       fechaInicio: fechaElegida,
       tipo: tipoElegido
     })
-  }).then(function(r) { return r.text(); })
+}).then(function(r) { return r.text(); })
   .then(function(resp) {
     if (resp === 'OK') {
       document.getElementById('app').innerHTML =
@@ -336,6 +336,9 @@ function enviarFormulario() {
         + '<h2 style="color:var(--naranja);margin-bottom:12px">¡Gracias por inscribirte!</h2>'
         + '<p style="color:var(--texto-suave);font-size:16px">En breve recibirás un WhatsApp con los datos para el pago. Tenés 15 minutos para enviarnos el comprobante.</p>'
         + '</div>';
+    } else if (resp === 'ERROR_YA_ENVIADO') {
+      document.getElementById('app').innerHTML =
+        '<div style="padding:24px"><h2 style="color:var(--naranja);margin-bottom:12px">Formulario ya enviado</h2><p>Ya enviaste anteriormente el formulario. El formulario se puede enviar una sola vez.</p></div>';
     } else {
       btn.disabled = false;
       btn.textContent = 'Enviar';
