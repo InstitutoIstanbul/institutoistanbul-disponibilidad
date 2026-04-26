@@ -1,1 +1,106 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>* { box-sizing: border-box; margin: 0; padding: 0; }body { font-family: Arial, sans-serif; background: #fff; padding: 24px; }.header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; }.header h3 { font-size: 18px; font-weight: 700; color: #E8734A; }.actualizado { font-size: 12px; color: #000; }.nivel-card { border: 1px solid #f0f0f0; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 16px; }.nivel-info { min-width: 130px; }.nivel-nombre { font-size: 14px; font-weight: 700; color: #222; }.nivel-codigo { display: inline-block; margin-top: 4px; font-size: 11px; font-weight: 600; background: #f5f0ed; color: #B85C30; border-radius: 4px; padding: 2px 7px; }.entradas { display: flex; flex-direction: column; gap: 7px; flex: 1; justify-content: center; }.badge { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; padding: 5px 12px; border-radius: 20px; width: fit-content; }.badge-abierto { background: #eaf6ee; color: #1e6e38; font-weight: 600; }.badge-pronto { background: #fdf0ea; color: #B85C30; font-weight: 600; }.badge-futuro { background: #f5f5f5; color: #666; }.badge-nada { background: #fafafa; color: #bbb; }.dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }.dot-abierto { background: #2d8a4e; }.dot-pronto { background: #E8734A; }.dot-futuro { background: #bbb; }.dot-nada { background: #ddd; }</style></head><body><div class="header"><h3>Disponibilidad de cursos OFFLINE en tiempo real</h3><span class="actualizado">Actualizado: 21/04/2026 01:47</span></div><div class="nivel-card"><div class="nivel-info"><div class="nivel-nombre">Principiante</div><span class="nivel-codigo">A1</span></div><div class="entradas"><span class="badge badge-abierto"><span class="dot dot-abierto"></span>Inicio 04/05/2026 · inscripciones abiertas hasta 01/05/2026</span></div></div><div class="nivel-card"><div class="nivel-info"><div class="nivel-nombre">Básico</div><span class="nivel-codigo">A2</span></div><div class="entradas"><span class="badge badge-abierto"><span class="dot dot-abierto"></span>Cursando lección 1/16 · Acepta inscripciones</span></div></div><div class="nivel-card"><div class="nivel-info"><div class="nivel-nombre">Básico</div><span class="nivel-codigo">A2</span></div><div class="entradas"><span class="badge badge-futuro"><span class="dot dot-futuro"></span>Próxima apertura: 04/05/2026</span></div></div><div class="nivel-card"><div class="nivel-info"><div class="nivel-nombre">Intermedio</div><span class="nivel-codigo">B1</span></div><div class="entradas"><span class="badge badge-abierto"><span class="dot dot-abierto"></span>Cursando lección 1/26 · Acepta inscripciones</span></div></div><div class="nivel-card"><div class="nivel-info"><div class="nivel-nombre">Intermedio</div><span class="nivel-codigo">B1</span></div><div class="entradas"><span class="badge badge-futuro"><span class="dot dot-futuro"></span>Próxima apertura: 03/08/2026</span></div></div><div class="nivel-card"><div class="nivel-info"><div class="nivel-nombre">Intermedio Alto</div><span class="nivel-codigo">B2</span></div><div class="entradas"><span class="badge badge-futuro"><span class="dot dot-futuro"></span>Próxima apertura: 08/06/2026</span></div></div><div class="nivel-card"><div class="nivel-info"><div class="nivel-nombre">Avanzado</div><span class="nivel-codigo">C1</span></div><div class="entradas"><span class="badge badge-futuro"><span class="dot dot-futuro"></span>Próxima apertura: 26/10/2026</span></div></div><div class="nivel-card"><div class="nivel-info"><div class="nivel-nombre">Maestría</div><span class="nivel-codigo">C2</span></div><div class="entradas"><span class="badge badge-nada"><span class="dot dot-nada"></span>Sin disponibilidad</span></div></div></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disponibilidad — Instituto İstanbul</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Nunito', sans-serif; background: #fff; padding: 24px; color: #222; }
+.header { margin-bottom: 20px; }
+.header h3 { font-size: 18px; font-weight: 800; color: #E8734A; margin-bottom: 4px; }
+.actualizado { font-size: 12px; color: #999; }
+.nivel-card { border: 1px solid #f0f0f0; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 16px; }
+.nivel-info { min-width: 130px; }
+.nivel-nombre { font-size: 14px; font-weight: 700; color: #222; }
+.nivel-codigo { display: inline-block; margin-top: 4px; font-size: 11px; font-weight: 600; background: #f5f0ed; color: #B85C30; border-radius: 4px; padding: 2px 7px; }
+.entradas { display: flex; flex-direction: column; gap: 7px; flex: 1; justify-content: center; }
+.badge { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; padding: 5px 12px; border-radius: 20px; width: fit-content; }
+.badge-abierto { background: #eaf6ee; color: #1e6e38; font-weight: 600; }
+.badge-futuro { background: #f5f5f5; color: #666; }
+.badge-nada { background: #fafafa; color: #bbb; }
+.badge-loading { background: #f5f5f5; color: #aaa; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dot-abierto { background: #2d8a4e; }
+.dot-futuro { background: #bbb; }
+.dot-nada { background: #ddd; }
+.spinner { width: 20px; height: 20px; border: 3px solid #f0f0f0; border-top-color: #E8734A; border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h3>Disponibilidad de cursos OFFLINE en tiempo real</h3>
+  <span class="actualizado" id="actualizado">Cargando...</span>
+</div>
+<div id="contenido">
+  <div class="nivel-card">
+    <div class="nivel-info"></div>
+    <div class="entradas"><span class="badge badge-loading"><div class="spinner"></div> Cargando disponibilidad...</span></div>
+  </div>
+</div>
+
+<script>
+var URL_SCRIPT = "https://script.google.com/macros/s/AKfycbwv4CTAQQY3rnERKJ9jzKEcZx5RkToOQxAmkmLnx2FmI6ncU2rhe5l9tCMynDDqfuS_/exec";
+
+var NIVELES = {
+  A1: 'Principiante', A2: 'Básico', B1: 'Intermedio',
+  B2: 'Intermedio Alto', C1: 'Avanzado', C2: 'Maestría'
+};
+var ORDEN = ['A1','A2','B1','B2','C1','C2'];
+
+fetch(URL_SCRIPT + '?accion=GET_DISPONIBILIDAD')
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    var grupos = data.grupos || [];
+    var proximas = data.proximas || {};
+    var html = '';
+    var ahora = new Date();
+    var fechaStr = ahora.toLocaleDateString('es-AR', { day:'2-digit', month:'2-digit', year:'numeric' })
+      + ' ' + ahora.toLocaleTimeString('es-AR', { hour:'2-digit', minute:'2-digit' });
+    document.getElementById('actualizado').textContent = 'Actualizado: ' + fechaStr;
+
+    ORDEN.forEach(function(cod) {
+      var nombre = NIVELES[cod];
+      var gruposDelNivel = grupos.filter(function(g) { return g.nivel === cod; });
+
+      gruposDelNivel.forEach(function(grupo) {
+        var badge, dot, texto;
+        if (grupo.tipo === 'cursando') {
+          badge = 'badge-abierto'; dot = 'dot-abierto';
+          texto = 'Cursando lección ' + grupo.semana + '/' + grupo.duracion + ' · Acepta inscripciones';
+        } else {
+          badge = 'badge-abierto'; dot = 'dot-abierto';
+          texto = 'Inicio ' + grupo.fechaInicioDisplay + ' · inscripciones abiertas';
+        }
+        html += tarjeta(nombre, cod, badge, dot, texto);
+      });
+
+      if (proximas[cod]) {
+        html += tarjeta(nombre, cod, 'badge-futuro', 'dot-futuro',
+          'Próxima apertura: ' + proximas[cod].fechaAperturaStr + ' · Inscripciones desde: ' + proximas[cod].fechaInscripciones);
+      }
+
+      if (gruposDelNivel.length === 0 && !proximas[cod]) {
+        html += tarjeta(nombre, cod, 'badge-nada', 'dot-nada', 'Sin disponibilidad');
+      }
+    });
+
+    document.getElementById('contenido').innerHTML = html;
+  })
+  .catch(function() {
+    document.getElementById('contenido').innerHTML =
+      '<div class="nivel-card"><div class="entradas"><span class="badge badge-nada">No se pudo cargar la disponibilidad.</span></div></div>';
+  });
+
+function tarjeta(nombre, cod, badge, dot, texto) {
+  return '<div class="nivel-card">'
+    + '<div class="nivel-info"><div class="nivel-nombre">' + nombre + '</div>'
+    + '<span class="nivel-codigo">' + cod + '</span></div>'
+    + '<div class="entradas"><span class="badge ' + badge + '">'
+    + '<span class="dot ' + dot + '"></span>' + texto + '</span></div></div>';
+}
+</script>
+</body>
+</html>
