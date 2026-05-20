@@ -136,7 +136,7 @@ function renderFormulario(grupos, proximas) {
           + '<div class="nivel-fecha">✅ Fecha de inicio: ' + grupo.fechaInicioDisplay + '</div>'
           + alertaA2 + '</div>';
       });
-    /* DESACTIVADO - mostrar grupos sin disponibilidad
+
     } else if (proximas && proximas[cod]) {
       opcionesHTML += '<div class="opcion-nivel no-disponible">'
         + '<div class="nivel-titulo">' + nombre + ' (' + cod + ')</div>'
@@ -153,7 +153,7 @@ function renderFormulario(grupos, proximas) {
         + '<div class="nivel-fecha">📋 Inscripciones abiertas desde: ' + proximas[cod].fechaInscripciones + '</div>'
         + '</div>';
     }
-    DESACTIVADO */
+
   });
   document.getElementById('app').innerHTML = `
   
