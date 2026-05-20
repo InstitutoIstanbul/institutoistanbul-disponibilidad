@@ -126,7 +126,7 @@ function renderFormulario(grupos, proximas) {
     if (gruposDelNivel.length > 0) {
       gruposDelNivel.forEach(function(grupo) {
         var alertaA2 = cod !== 'A1'
-          ? '<div class="alerta-nivel">ℹ️ Nuestro método es único, te recomendamos empezar desde Principiante (A1) aunque ya tengas algo de conocimiento del idioma. De todas formas, podés inscribirte directamente en este nivel si lo preferís.</div>'
+          ? '<div class="alerta-nivel">ℹ️ Nuestro método es único, te recomendamos empezar desde Principiante (A1) aunque ya tengas algo de conocimiento del idioma. De todas formas, puedes inscribirte directamente en este nivel si lo prefieres.</div>'
           : '';
         opcionesHTML += '<div class="opcion-nivel" onclick="elegirNivel(this)" '
           + 'data-nivel="' + cod + '" data-grupo="' + grupo.hoja + '" '
