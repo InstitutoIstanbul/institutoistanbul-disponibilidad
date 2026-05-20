@@ -136,22 +136,24 @@ function renderFormulario(grupos, proximas) {
           + '<div class="nivel-fecha">✅ Fecha de inicio: ' + grupo.fechaInicioDisplay + '</div>'
           + alertaA2 + '</div>';
       });
-    } else if (proximas && proximas[cod]) {
-      opcionesHTML += '<div class="opcion-nivel no-disponible">'
-        + '<div class="nivel-titulo">' + nombre + ' (' + cod + ')</div>'
-        + '<div class="nivel-detalle">Sin disponibilidad</div>'
-        + '<div class="nivel-fecha">🗓️ Próxima apertura: ' + proximas[cod].fechaAperturaStr + '</div>'
-        + '<div class="nivel-fecha">📋 Inscripciones abiertas desde: ' + proximas[cod].fechaInscripciones + '</div>'
-        + '</div>';
-    }
-    if (gruposDelNivel.length > 0 && proximas && proximas[cod]) {
-      opcionesHTML += '<div class="opcion-nivel no-disponible">'
-        + '<div class="nivel-titulo">' + nombre + ' (' + cod + ') — Próximo grupo</div>'
-        + '<div class="nivel-detalle">Sin disponibilidad aún</div>'
-        + '<div class="nivel-fecha">🗓️ Próxima apertura: ' + proximas[cod].fechaAperturaStr + '</div>'
-        + '<div class="nivel-fecha">📋 Inscripciones abiertas desde: ' + proximas[cod].fechaInscripciones + '</div>'
-        + '</div>';
-    } 
+    /* DESACTIVADO - mostrar grupos sin disponibilidad
+} else if (proximas && proximas[cod]) {
+  opcionesHTML += '<div class="opcion-nivel no-disponible">'
+    + '<div class="nivel-titulo">' + nombre + ' (' + cod + ')</div>'
+    + '<div class="nivel-detalle">Sin disponibilidad</div>'
+    + '<div class="nivel-fecha">🗓️ Próxima apertura: ' + proximas[cod].fechaAperturaStr + '</div>'
+    + '<div class="nivel-fecha">📋 Inscripciones abiertas desde: ' + proximas[cod].fechaInscripciones + '</div>'
+    + '</div>';
+}
+if (gruposDelNivel.length > 0 && proximas && proximas[cod]) {
+  opcionesHTML += '<div class="opcion-nivel no-disponible">'
+    + '<div class="nivel-titulo">' + nombre + ' (' + cod + ') — Próximo grupo</div>'
+    + '<div class="nivel-detalle">Sin disponibilidad aún</div>'
+    + '<div class="nivel-fecha">🗓️ Próxima apertura: ' + proximas[cod].fechaAperturaStr + '</div>'
+    + '<div class="nivel-fecha">📋 Inscripciones abiertas desde: ' + proximas[cod].fechaInscripciones + '</div>'
+    + '</div>';
+}
+DESACTIVADO */
   });
 
   document.getElementById('app').innerHTML = `
