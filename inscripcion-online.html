@@ -183,9 +183,8 @@ function renderFormulario(grupos) {
       opcionesHTML += '<label class="opcion-grupo" id="opcion-' + idx + '" onclick="elegirGrupo(' + idx + ', \'' + g.grupo + '\', \'' + g.nivel + '\', \'' + g.dia + '\', \'' + g.horario + '\')">'
         + '<input type="radio" name="grupo_online" value="' + g.grupo + '">'
         + '<div>'
-        + '<div class="grupo-titulo">' + g.grupo + '</div>'
-        + '<div class="grupo-detalle">📅 Los ' + g.dia + '&nbsp;&nbsp;🕐 ' + g.horario + ' hs (Hora Argentina)</div>'
-        + '<div class="grupo-nivel">Nivel: ' + nivelNombre + ' (' + g.nivel + ')</div>'
+        + '<div class="grupo-detalle"><b>🗓️ Los ' + g.dia + '</b><br><b>⏰ ' + g.horario + ' hs (Hora Argentina)</b></div>'
+        + '<div class="grupo-nivel"><b>📊 Nivel: ' + nivelNombre + ' (' + g.nivel + ')</b></div>'
         + '</div>'
         + '</label>';
     });
