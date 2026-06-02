@@ -183,9 +183,10 @@ function renderFormulario(grupos) {
       opcionesHTML += '<label class="opcion-grupo" id="opcion-' + idx + '" onclick="elegirGrupo(' + idx + ', \'' + g.grupo + '\', \'' + g.nivel + '\', \'' + g.dia + '\', \'' + g.horario + '\')">'
         + '<input type="radio" name="grupo_online" value="' + g.grupo + '">'
         + '<div>'
-        + '<div class="grupo-detalle">🗓️ Los días: <b>' + g.dia + '</b><br>⏰ Horario: <b>' + g.horario + ' hs (Hora Argentina)</b></div>'
-        + '<div class="grupo-nivel">📊 Nivel: <b>' + nivelNombre + ' (' + g.nivel + ')</b></div>'
-        + (g.fechaInicio ? '<div class="grupo-detalle">📅 Fecha de inicio: <b>' + g.fechaInicio + '</b></div>' : '')
+        + '<div class="grupo-detalle" style="margin-top:4px">🗓️ Los días: <b>' + g.dia + '</b></div>'
+        + '<div class="grupo-detalle" style="margin-top:4px">⏰ Horario: <b>' + g.horario + ' hs (Hora Argentina)</b></div>'
+        + '<div class="grupo-nivel" style="margin-top:4px">📊 Nivel: <b>' + nivelNombre + ' (' + g.nivel + ')</b></div>'
+        + (g.fechaInicio ? '<div class="grupo-detalle" style="margin-top:4px">⏳ Fecha de inicio: <b>' + g.fechaInicio + '</b></div>' : '')
         + '</div>'
         + '</label>';
     });
