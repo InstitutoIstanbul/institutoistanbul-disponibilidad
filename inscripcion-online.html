@@ -185,6 +185,7 @@ function renderFormulario(grupos) {
         + '<div>'
         + '<div class="grupo-detalle">🗓️ Los días: <b>' + g.dia + '</b><br>⏰ Horario: <b>' + g.horario + ' hs (Hora Argentina)</b></div>'
         + '<div class="grupo-nivel">📊 Nivel: <b>' + nivelNombre + ' (' + g.nivel + ')</b></div>'
+        + (g.fechaInicio ? '<div class="grupo-detalle">📅 Fecha de inicio: <b>' + g.fechaInicio + '</b></div>' : '')
         + '</div>'
         + '</label>';
     });
