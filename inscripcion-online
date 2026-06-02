@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscripción Online — Instituto İstanbul</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/InstitutoIstanbul/logo/main/logo.png">
+<style>
+:root {
+  --naranja: #E8734A;
+  --naranja-dark: #c75e38;
+  --naranja-light: #fff3ee;
+  --gris: #f4f4f4;
+  --texto: #222;
+  --texto-suave: #666;
+  --borde: #e0e0e0;
+  --error: #dc3545;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; min-height: 100vh; }
+body { font-family: 'Nunito', sans-serif; background: #f4f4f4; color: var(--texto); font-size: 16px; }
+.container { max-width: 600px; width: 100%; margin: 0 auto; background: #fff; min-height: 100vh; padding: 24px 20px 48px; }
+.logo { display: block; max-width: 140px; margin-bottom: 20px; }
+h1 { font-size: 24px; font-weight: 800; color: var(--naranja); margin-bottom: 4px; line-height: 1.2; }
+.subtitulo { font-size: 15px; color: var(--texto-suave); margin-bottom: 28px; }
+.seccion { margin-bottom: 24px; }
+.seccion-titulo { font-size: 16px; font-weight: 700; color: var(--texto); margin-bottom: 10px; }
+input[type=text], input[type=email], select {
+  width: 100%; padding: 14px 16px;
+  border: 2px solid var(--borde); border-radius: 10px;
+  font-size: 16px; font-family: 'Nunito', sans-serif;
+  color: var(--texto); background: #fff;
+  -webkit-appearance: none; appearance: none;
+  transition: border-color 0.2s;
+}
+input:focus, select:focus { outline: none; border-color: var(--naranja); }
+input[readonly] { background: var(--gris); color: #999; }
+.hint { font-size: 13px; color: #aaa; margin-top: 5px; }
+
+/* --- Grupos online: checkboxes de selección única --- */
+.opcion-grupo {
+  border: 2px solid var(--borde);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #fff;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.opcion-grupo input[type=radio] {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--naranja);
+  flex-shrink: 0;
+  margin-top: 3px;
+  cursor: pointer;
+}
+.opcion-grupo.seleccionado {
+  border-color: var(--naranja);
+  background: var(--naranja-light);
+}
+.grupo-titulo { font-size: 17px; font-weight: 800; color: var(--texto); }
+.grupo-detalle { font-size: 14px; color: var(--texto-suave); margin-top: 4px; line-height: 1.5; }
+.grupo-nivel { font-size: 14px; color: var(--naranja); font-weight: 600; margin-top: 6px; }
+
+/* --- Radio menor de edad --- */
+.radio-grupo { display: flex; gap: 16px; margin-top: 8px; }
+.radio-option { flex: 1; border: 2px solid var(--borde); border-radius: 10px; padding: 14px; display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 16px; font-weight: 600; transition: all 0.2s; }
+.radio-option input { width: 20px; height: 20px; accent-color: var(--naranja); flex-shrink: 0; }
+.radio-option:has(input:checked) { border-color: var(--naranja); background: var(--naranja-light); }
+.bloqueo-menor { display: none; background: #f8d7da; border-radius: 10px; padding: 14px; margin-top: 10px; font-size: 14px; color: #721c24; line-height: 1.5; }
+
+/* --- Términos --- */
+.termino-bloque { border: 2px solid var(--borde); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+.termino-texto { font-size: 14px; color: var(--texto-suave); line-height: 1.6; margin-bottom: 14px; }
+.checkbox-grupo { display: flex; align-items: center; gap: 12px; }
+.checkbox-grupo input[type=checkbox] { width: 22px; height: 22px; accent-color: var(--naranja); flex-shrink: 0; cursor: pointer; }
+.checkbox-grupo label { font-size: 15px; font-weight: 700; color: var(--texto); cursor: pointer; }
+
+/* --- Alerta timer --- */
+.alerta-timer { background: #fff3cd; border-left: 4px solid var(--naranja); padding: 14px 16px; border-radius: 10px; font-size: 15px; color: #856404; margin-bottom: 20px; line-height: 1.5; }
+
+/* --- Botón --- */
+.btn-enviar { width: 100%; background: var(--naranja); color: #fff; border: none; padding: 18px; border-radius: 12px; font-size: 18px; font-weight: 800; font-family: 'Nunito', sans-serif; cursor: pointer; transition: background 0.2s; }
+.btn-enviar:hover { background: var(--naranja-dark); }
+.btn-enviar:disabled { background: #ccc; cursor: not-allowed; }
+
+/* --- Errores --- */
+.error-msg { color: var(--error); font-size: 13px; margin-top: 6px; display: none; font-weight: 600; }
+#grupo-error { color: var(--error); font-size: 13px; margin-top: 6px; display: none; font-weight: 600; }
+
+/* --- Loading --- */
+.loading { text-align: center; padding: 40px 20px; color: var(--texto-suave); font-size: 16px; }
+.spinner { width: 40px; height: 40px; border: 4px solid #f0f0f0; border-top-color: var(--naranja); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+a { color: var(--naranja); }
+
+/* --- Badge online --- */
+.badge-online {
+  display: inline-block;
+  background: #e8f5e9;
+  color: #2e7d32;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+</style>
+</head>
+<body>
+<div class="container" id="app">
+  <div class="loading">
+    <div class="spinner"></div>
+    Cargando el formulario...
+  </div>
+</div>
+
+<script>
+// ============================================================
+// URL del web app — mismo que el formulario offline
+// ============================================================
+var URL_SCRIPT = "https://script.google.com/macros/s/AKfycbwv4CTAQQY3rnERKJ9jzKEcZx5RkToOQxAmkmLnx2FmI6ncU2rhe5l9tCMynDDqfuS_/exec";
+
+// Leer teléfono y contraseña desde la URL (igual que offline)
+var telefono = new URLSearchParams(window.location.search).get('telefono') || '';
+if (telefono && !telefono.startsWith('+')) telefono = '+' + telefono.replace(/\D/g, '');
+var contrasenaURL = new URLSearchParams(window.location.search).get('contrasena') || '';
+
+// Variables del grupo elegido
+var grupoElegido = null;
+var nivelElegido = null;
+var fechaElegida = null;
+var tipoElegido = null;
+
+var NIVELES = {
+  A1: 'Principiante', A2: 'Básico', B1: 'Intermedio',
+  B2: 'Intermedio Alto', C1: 'Avanzado', C2: 'Maestría'
+};
+
+// ============================================================
+// Al cargar: verificar estado del alumno y cargar grupos online
+// ============================================================
+Promise.all([
+  fetch(URL_SCRIPT + '?accion=VERIFICAR_ESTADO&telefono=' + encodeURIComponent(telefono)).then(r => r.json()),
+  fetch(URL_SCRIPT + '?accion=GET_DISPONIBILIDAD_ONLINE').then(r => r.json())
+]).then(function([estado, disp]) {
+  if (estado.bloqueado) {
+    mostrarMensaje('Acceso bloqueado', 'Tu acceso está bloqueado. Contactá a un asesor desde el menú de WhatsApp.');
+    return;
+  }
+  if (estado.pendiente) {
+    mostrarMensaje('Inscripción pendiente', 'Ya tenés una inscripción pendiente. Enviá el comprobante de pago por WhatsApp.');
+    return;
+  }
+  renderFormulario(disp.grupos);
+}).catch(function() {
+  mostrarMensaje('Error', 'No se pudo cargar el formulario. Intentá de nuevo más tarde.');
+});
+
+function mostrarMensaje(titulo, texto) {
+  document.getElementById('app').innerHTML =
+    '<div style="padding:20px"><h2 style="color:var(--naranja);margin-bottom:12px">' + titulo + '</h2><p>' + texto + '</p></div>';
+}
+
+// ============================================================
+// Renderizar formulario con grupos online disponibles
+// ============================================================
+function renderFormulario(grupos) {
+
+  // Generar opciones de grupos online como radio buttons
+  var opcionesHTML = '';
+  if (!grupos || grupos.length === 0) {
+    opcionesHTML = '<p style="color:var(--texto-suave);font-size:15px;padding:12px 0">No hay grupos online disponibles en este momento. Consultá con un asesor.</p>';
+  } else {
+    grupos.forEach(function(g, idx) {
+      var nivelNombre = NIVELES[g.nivel] || g.nivelNombre || g.nivel;
+      opcionesHTML += '<label class="opcion-grupo" id="opcion-' + idx + '" onclick="elegirGrupo(' + idx + ', \'' + g.grupo + '\', \'' + g.nivel + '\', \'' + g.dia + '\', \'' + g.horario + '\')">'
+        + '<input type="radio" name="grupo_online" value="' + g.grupo + '">'
+        + '<div>'
+        + '<div class="grupo-titulo">' + g.grupo + '</div>'
+        + '<div class="grupo-detalle">📅 Los ' + g.dia + '&nbsp;&nbsp;🕐 ' + g.horario + ' hs (Hora Argentina)</div>'
+        + '<div class="grupo-nivel">Nivel: ' + nivelNombre + ' (' + g.nivel + ')</div>'
+        + '</div>'
+        + '</label>';
+    });
+  }
+
+  document.getElementById('app').innerHTML = `
+    <img src="https://institutoistanbul.ar/images/logo.svg" class="logo" onerror="this.style.display='none'">
+
+    <span class="badge-online">🌐 Modalidad Online</span>
+
+    <h1>Instituto İstanbul 🇹🇷</h1>
+    <p class="subtitulo">Este es el formulario para la inscripción oficial. Es importante que lo completes leyendo todo con mucha atención. Una vez completado, quedarás oficialmente inscrito/a en nuestra escuela.
+Recuerda que completar este formulario es un compromiso.
+¡Muchas gracias!</p>
+
+    <div class="seccion">
+      <div class="seccion-titulo">🔐 Contraseña de acceso *</div>
+      <input type="text" id="contrasena" placeholder="Contraseña que recibiste por WhatsApp" value="${contrasenaURL}">
+      <div id="error-contrasena" class="error-msg">Contraseña incorrecta o expirada. Volvé al menú de WhatsApp.</div>
+    </div>
+
+    <div class="seccion">
+      <div class="seccion-titulo">Elige tu grupo</div>
+      ${opcionesHTML}
+      <div id="grupo-error" class="error-msg">Por favor elegí un grupo disponible.</div>
+    </div>
+
+    <div class="seccion">
+      <div class="seccion-titulo">Nombre y apellido *</div>
+      <input type="text" id="nombre" placeholder="Ej: María González">
+      <p class="hint">Escribe primero el nombre con el que quieres que te llamemos.</p>
+      <div id="error-nombre" class="error-msg">Ingresá tu nombre completo.</div>
+    </div>
+
+    <div class="seccion">
+      <div class="seccion-titulo">Tu número de WhatsApp</div>
+      <input type="text" id="telefono" value="${telefono}" readonly>
+    </div>
+
+    <div class="seccion">
+      <div class="seccion-titulo">E-mail (debe ser Gmail) *</div>
+      <input type="email" id="email" placeholder="ejemplo@gmail.com">
+      <div id="error-email" class="error-msg">Ingresá un email de Gmail válido (@gmail.com).</div>
+    </div>
+
+    <div class="seccion">
+      <div class="seccion-titulo">¿En qué ciudad y país te encuentras? *</div>
+      <input type="text" id="localidad" placeholder="Ej: Buenos Aires, Argentina">
+      <div id="error-localidad" class="error-msg">Ingresá tu ciudad y país.</div>
+    </div>
+
+    <div class="seccion">
+      <div class="seccion-titulo">¿Eres menor de edad? *</div>
+      <div class="radio-grupo">
+        <label class="radio-option"><input type="radio" name="menor" value="no"> No</label>
+        <label class="radio-option"><input type="radio" name="menor" value="si"> Sí</label>
+      </div>
+      <div id="error-menor" class="error-msg">Debés responder esta pregunta.</div>
+      <div id="bloqueo-menor" class="bloqueo-menor">No puedes inscribirte siendo menor de edad. Por favor, contactá la administración solicitando un asesor desde el menú de WhatsApp.</div>
+    </div>
+
+    <div class="seccion">
+      <div class="seccion-titulo">Método de pago *</div>
+      <select id="metodopago">
+        <option value="">— Seleccioná una opción —</option>
+        <option value="ARG_TRANSFER">en Argentina por Transferencia Bancaria</option>
+        <option value="ARG_MP">en Argentina por Mercado Pago</option>
+        <option value="TUR_TRANSFER">en Turquía por Transferencia Bancaria</option>
+        <option value="PAYPAL">por PayPal. Estoy en otra localidad</option>
+      </select>
+      <div id="error-metodo" class="error-msg">Seleccioná un método de pago.</div>
+    </div>
+
+    <div class="seccion">
+      <div class="seccion-titulo">Términos y condiciones *</div>
+      <div class="termino-bloque">
+        <div class="termino-texto"><b>PLATAFORMA y CONDICIONES</b><br>Contenido a completar por el administrador.</div>
+        <div class="checkbox-grupo">
+          <input type="checkbox" id="check-materiales">
+          <label for="check-materiales">He leído y acepto.</label>
+        </div>
+      </div>
+      <div class="termino-bloque">
+        <div class="termino-texto"><b>ASISTENCIA DEL PROFESOR</b><br>Su profesor será el Sr. Serkan, es nativo y vive en Buenos Aires, Argentina. El ha estado enseñando el idioma desde hace 20 años. <br>Durante la semana, el profesor te va a asistir al menos una vez por semana (suele ser los lunes) en el horario hábil de Argentina en un grupo de WhatsApp con tus compañeros, cuando tengas alguna pregunta sobre las materias y/o para revisar las tareas que has hecho. <br>También queremos informarte que el profesor ha pasado por una cirugía de garganta y su voz actualmente tiene un tono grave. Sin embargo, esto no afecta su capacidad para impartir la clase, ya que ha estado enseñando de esta manera durante mucho tiempo.</div>
+        <div class="checkbox-grupo">
+          <input type="checkbox" id="check-asistencia">
+          <label for="check-asistencia">He leído y acepto.</label>
+        </div>
+      </div>
+      <div class="termino-bloque">
+        <div class="termino-texto"><b>POLÍTICA DE PAGO</b><br>Se requiere pago por mes adelantado. El monto mensual a pagar se calcula en función de la cantidad de lunes que tiene el mes. Por ejemplo, si el mes cuenta con cuatro lunes, el total a pagar sería el precio de las cuatro clases juntas. Si el mes cuenta con cinco lunes, sería el precio de las cinco clases. <br>Debes realizar el pago hasta el día 10 de cada mes e informar tu pago mediante un link en un correo electrónico que te mandaremos el 1° de cada mes, adjuntando el comprobante del pago. Por favor agéndalo y hacelo sin recordatorios, en tiempo y forma para no tener recargos innecesarios. Después del día diez se aplicarán recargos. <br>Te invitamos a leer nuestra política de pago <a href="https://institutoistanbul.ar/pp.html" target="_blank">aquí</a>. Al continuar, aceptas automáticamente los términos y condiciones.</div>
+        <div class="checkbox-grupo">
+          <input type="checkbox" id="check-pago">
+          <label for="check-pago">He leído y acepto.</label>
+        </div>
+      </div>
+      <div id="error-checks" class="error-msg">Debés aceptar todos los términos para continuar.</div>
+    </div>
+
+    <div class="alerta-timer">⏰ ❗ Al apretar el botón "Enviar", vas a tener 30 minutos para abonar y enviarnos el comprobante por WhatsApp. Si no recibimos tu comprobante a tiempo, la inscripción se cancela automáticamente. ¡Vamos! 🚀</div>
+
+    <button class="btn-enviar" onclick="enviarFormulario()">Enviar</button>
+  `;
+
+  // Evento menor de edad
+  document.querySelectorAll('input[name=menor]').forEach(function(r) {
+    r.addEventListener('change', function() {
+      document.getElementById('bloqueo-menor').style.display = this.value === 'si' ? 'block' : 'none';
+    });
+  });
+}
+
+// ============================================================
+// Seleccionar grupo — radio button de selección única
+// ============================================================
+function elegirGrupo(idx, grupo, nivel, dia, horario) {
+  // Quitar seleccionado de todos
+  document.querySelectorAll('.opcion-grupo').forEach(function(e) {
+    e.classList.remove('seleccionado');
+  });
+  // Marcar el elegido
+  var opcion = document.getElementById('opcion-' + idx);
+  if (opcion) {
+    opcion.classList.add('seleccionado');
+    opcion.querySelector('input[type=radio]').checked = true;
+  }
+  // Guardar valores
+  grupoElegido = grupo;
+  nivelElegido = nivel;
+  fechaElegida = dia + ' ' + horario; // ej: "MARTES 17:00" — se usa como referencia de fecha de inicio
+  tipoElegido = 'online';
+}
+
+// ============================================================
+// Enviar formulario
+// ============================================================
+function enviarFormulario() {
+  var ok = true;
+  document.querySelectorAll('.error-msg').forEach(function(e) { e.style.display = 'none'; });
+
+  // Validar grupo elegido
+  if (!grupoElegido) {
+    document.getElementById('grupo-error').style.display = 'block';
+    ok = false;
+  }
+
+  var nombre = document.getElementById('nombre').value.trim();
+  if (!nombre) { document.getElementById('error-nombre').style.display = 'block'; ok = false; }
+
+  var email = document.getElementById('email').value.trim().toLowerCase();
+  if (!email.endsWith('@gmail.com')) { document.getElementById('error-email').style.display = 'block'; ok = false; }
+
+  var localidad = document.getElementById('localidad').value.trim();
+  if (!localidad) { document.getElementById('error-localidad').style.display = 'block'; ok = false; }
+
+  var menorVal = document.querySelector('input[name=menor]:checked');
+  if (!menorVal) { document.getElementById('error-menor').style.display = 'block'; ok = false; }
+  else if (menorVal.value === 'si') { ok = false; }
+
+  var metodo = document.getElementById('metodopago').value;
+  if (!metodo) { document.getElementById('error-metodo').style.display = 'block'; ok = false; }
+
+  var contrasena = document.getElementById('contrasena').value.trim();
+  if (!contrasena) { document.getElementById('error-contrasena').style.display = 'block'; ok = false; }
+
+  if (!document.getElementById('check-materiales').checked ||
+      !document.getElementById('check-asistencia').checked ||
+      !document.getElementById('check-pago').checked) {
+    document.getElementById('error-checks').style.display = 'block';
+    ok = false;
+  }
+
+  if (!ok) {
+    var primerError = document.querySelector('.error-msg[style*="block"]');
+    if (primerError) primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  var btn = document.querySelector('.btn-enviar');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  fetch(URL_SCRIPT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({
+      accion: 'NUEVA_INSCRIPCION',
+      modalidad: 'online',          // identifica esta inscripción como online
+      telefono: telefono,
+      nombre: nombre,
+      email: email,
+      localidad: localidad,
+      metodopago: metodo,
+      contrasena: contrasena,
+      nivel: nivelElegido,
+      grupo: grupoElegido,
+      fechaInicio: fechaElegida,
+      tipo: tipoElegido
+    })
+  }).then(function(r) { return r.text(); })
+    .then(function(resp) {
+      if (resp === 'OK') {
+        document.getElementById('app').innerHTML =
+          '<div style="padding:24px;text-align:center">'
+          + '<div style="font-size:48px;margin-bottom:16px">🎉</div>'
+          + '<h2 style="color:var(--naranja);margin-bottom:12px">¡Gracias por inscribirte!</h2>'
+          + '<p style="color:var(--texto-suave);font-size:16px">En breve recibirás un mensaje de WhatsApp con los datos para el pago. Tienes 30 minutos para enviarnos el comprobante.</p>'
+          + '</div>';
+      } else if (resp === 'ERROR_YA_ENVIADO') {
+        document.getElementById('app').innerHTML =
+          '<div style="padding:24px"><h2 style="color:var(--naranja);margin-bottom:12px">Formulario ya enviado</h2><p>Ya enviaste anteriormente el formulario. El formulario se puede enviar una sola vez.</p></div>';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Enviar';
+        alert('Error: ' + resp);
+      }
+    }).catch(function() {
+      btn.disabled = false;
+      btn.textContent = 'Enviar';
+      alert('Error de conexión. Intentá de nuevo.');
+    });
+}
+</script>
+</body>
+</html>
