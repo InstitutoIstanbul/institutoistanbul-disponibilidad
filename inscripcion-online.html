@@ -180,7 +180,7 @@ function renderFormulario(grupos) {
   } else {
     grupos.forEach(function(g, idx) {
       var nivelNombre = NIVELES[g.nivel] || g.nivelNombre || g.nivel;
-      opcionesHTML += '<label class="opcion-grupo" id="opcion-' + idx + '" onclick="elegirGrupo(' + idx + ', \'' + g.grupo + '\', \'' + g.nivel + '\', \'' + g.dia + '\', \'' + g.horario + '\')">'
+      opcionesHTML += '<label class="opcion-grupo" id="opcion-' + idx + '" onclick="elegirGrupo(' + idx + ', \'' + g.grupo + '\', \'' + g.nivel + '\', \'' + g.dia + '\', \'' + g.horario + '\', \'' + (g.fechaInicio || '') + '\')">'
         + '<input type="radio" name="grupo_online" value="' + g.grupo + '">'
         + '<div>'
         + '<div class="grupo-detalle" style="margin-top:4px">🗓️ Los días: <b>' + g.dia + '</b></div>'
@@ -308,7 +308,7 @@ Recuerda que completar este formulario es un compromiso.
 // ============================================================
 // Seleccionar grupo — radio button de selección única
 // ============================================================
-function elegirGrupo(idx, grupo, nivel, dia, horario) {
+function elegirGrupo(idx, grupo, nivel, dia, horario, fechaInicio) {
   // Quitar seleccionado de todos
   document.querySelectorAll('.opcion-grupo').forEach(function(e) {
     e.classList.remove('seleccionado');
@@ -322,7 +322,7 @@ function elegirGrupo(idx, grupo, nivel, dia, horario) {
   // Guardar valores
   grupoElegido = grupo;
   nivelElegido = nivel;
-  fechaElegida = dia + ' ' + horario; // ej: "MARTES 17:00" — se usa como referencia de fecha de inicio
+  fechaElegida = fechaInicio || (dia + ' ' + horario); // ej: "MARTES 17:00" — se usa como referencia de fecha de inicio
   tipoElegido = 'online';
 }
 
